@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 <style>
 body {
-	background: #b8d3ff
+	background: #fac4ff;
 }
 </style>
 </head>
