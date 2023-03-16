@@ -1,5 +1,4 @@
 <%@page import="multi.MemberDAO3"%>
-<%@page import="multi.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
