@@ -33,7 +33,7 @@
 <head>
 <meta charset="UTF-8">
 <title>영화 정보 등록</title>
-<style>
+<style type="text/css">
 body {
 	background: #fac4ff;
 }
@@ -51,7 +51,7 @@ body {
 <%-- 추가한 title: <%=title %> <br>
 추가한 content: <%=content %> <br>
 추가한 writer: <%=director %> <br> --%>
- 추가한 title: <%=bag.getTitle() %> <br>
+추가한 title: <%=bag.getTitle() %> <br>
 추가한 content: <%=bag.getContent() %> <br>
 추가한 writer: <%=bag.getDirector() %> <br>
 </body>

@@ -8,10 +8,6 @@ import java.util.ArrayList;
 
 public class MovieDAO {
 
-	// 메서드를 만드는 것 ==> 메서드 정의(define)!
-	// 메서드를 정의했다고 실행되는 것은 아니다.!
-	// 메서드를 쓰는 것 => 메서드 호출(call)!
-
 	// 여러개 가져오기
 	public ArrayList<MovieVO> list() { // 검색하려면 ()안에 적어주기
 		ResultSet rs = null; // 항목명 + 결과데이터를 담고있는 테이블
@@ -19,7 +15,7 @@ public class MovieDAO {
 		// 가방들 넣어줄 큰 컨테이너 역할을 부품이 필요!
 		// ArrayList
 		ArrayList<MovieVO> list = new ArrayList<>(); // 앞 꺽쇠에 뭘가져올지 적는것
-		// ArrayList<MemberVO> ==> MemberVO만 들어간 arraylist라는 의미
+		// ArrayList<movieVO> ==> movieVO만 들어간 arraylist라는 의미
 
 		MovieVO bag = null;
 		try {
@@ -37,7 +33,7 @@ public class MovieDAO {
 			System.out.println("2. mySQL 연결 성공.");
 
 			// 3.
-			String sql = "select * from movie"; // 조건주지 않고 다 가져옴
+			String sql = "select id, title, director from movie"; // 조건주지 않고 다 가져옴
 			PreparedStatement ps = con.prepareStatement(sql);
 			// ps.setString(1, id); //?가 없어졌기 때문에 필요없음 삭제!
 			System.out.println("3. SQL문 부품(객체)으로 만들어주기.");
@@ -47,25 +43,16 @@ public class MovieDAO {
 			System.out.println("4. SQL문 mySQL로 보내기 성공.");
 			while (rs.next()) { // 검색결과가 있는지 여부는 rs.next()
 			// true이면 있다라는 의미, false이면 없다라는 의미
-			// 1. 검색결과가 있으면,
-			// System.out.println("검색결과 있음. 성공.");
-			// 2. 각 컬럼에서 가져오자
-			String id = rs.getString(1); // id
-			String title = rs.getString(2);
-			String content = rs.getString(3);
-			String location = rs.getString(4);
-			String director = rs.getString(5);
-			// 3. 가방을 만들자
-			bag = new MovieVO(); // 가방만들어서
-			bag.setId(id); // 가방에다 쫙 넣자
-			bag.setTitle(title);
-			bag.setContent(content);
-			bag.setLocation(location);
-			bag.setDirector(director);
 
-			// 4. list에 bag을 추가해주자.
+			//1)한번에 이렇게 적어줄수 있음
+			bag = new MovieVO(); // 가방만들어서
+			bag.setId(rs.getString("id")); // 가방에다 쫙 넣자
+			bag.setTitle(rs.getString("title"));
+			bag.setDirector(rs.getString("director"));
+
+			// 2) list에 bag을 추가해주자.
 			list.add(bag);
-			} // while로 바뀌었기 때문에 if-else의 else삭제!
+			} 
 			ps.close();
 			rs.close();
 			con.close();
@@ -81,7 +68,9 @@ public class MovieDAO {
 
 	// 검색
 	public MovieVO one(String id) {
-
+		//검색결과가 null이 뜨는 경우에는 입력값은 id를 출력해보세요.!!
+		System.out.println(id);
+		
 		ResultSet rs = null; // int를 -> ResultSet로 바꿈, 0 -> null로 바꿈
 		// 항목명 + 결과데이터를 담고있는 테이블
 		// 기본형 정수/실수/문자/논리만 값으로 초기화
@@ -113,31 +102,22 @@ public class MovieDAO {
 			rs = ps.executeQuery(); // select문 전송시 정수X,테이블O executeUpdate 대신 executeQuery
 			System.out.println("4. SQL문 mySQL로 보내기 성공.");
 			if (rs.next()) { // 검색결과가 있는지 여부는 rs.next()
-				// true이면 있다라는 의미, false이면 없다라는 의미
 				System.out.println("검색결과 있음. 성공.");
-				String id2 = rs.getString(1); // id
-				String title = rs.getString(2);
-				String content = rs.getString(3);
-				String location = rs.getString(4);
-				String director = rs.getString(5);
-				System.out.println(id2 + " " + title + " " + content + " " + location + " " + director);
-				// 검색결과를 검색화면 UI부분에 넣어주어야 함. (여기에jop넣으면 안됨)
+				
+				//1)한번에 이렇게 적어줄수 있음
 				bag = new MovieVO();
-				bag.setId(id2);
-				bag.setTitle(title);
-				bag.setContent(content);
-				bag.setLocation(location);
-				bag.setDirector(director);
+				bag.setId(rs.getString("id"));
+				bag.setTitle(rs.getString("title"));
+				bag.setContent(rs.getString("content"));
+				bag.setLocation(rs.getString("location"));
+				bag.setDirector(rs.getString("director"));
 			} else {
 				System.out.println("검색결과 없음. 성공.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// return id, pw, name, tel은 XXXX! ==> 파이썬만 가능
-		// return 뒤에는 반드시 여러 데이터를 묶어서 리턴해주어야 함 ==> 자바는 가방을 만들어줘야함
-		// 검색결과가 있을 때는 bag에 데이터가 들어있음.
-		// 검색결과가 없을 때는 bag에 무엇이 들어있나? null
+		System.out.println(bag); //bag에 제대로 들어갔는지 체크
 		return bag;
 	}
 

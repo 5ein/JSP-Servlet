@@ -14,12 +14,12 @@ public class ProductDAO {
 
 	// 여러개 가져오기
 	public ArrayList<ProductVO> list() { // 검색하려면 ()안에 적어주기
-		ResultSet rs = null; // 항목명 + 결과데이터를 담고있는 테이블
+		ResultSet rs = null; // 항목명 + 결과데이터를 담고있는 테이블 (DB에서의 테이블)
 
 		// 가방들 넣어줄 큰 컨테이너 역할을 부품이 필요!
 		// ArrayList
-		ArrayList<ProductVO> list = new ArrayList<>(); // 앞 꺽쇠에 뭘가져올지 적는것
 		// ArrayList<ProductVO> ==> ProductVO만 들어간 arraylist라는 의미
+		ArrayList<ProductVO> list = new ArrayList<>(); // 앞 꺽쇠에 뭘가져올지 적는것
 
 		ProductVO bag = null;
 		try {
@@ -46,40 +46,35 @@ public class ProductDAO {
 			rs = ps.executeQuery();
 			System.out.println("4. SQL문 mySQL로 보내기 성공.");
 			while (rs.next()) { // 검색결과가 있는지 여부는 rs.next()
-			// true이면 있다라는 의미, false이면 없다라는 의미
-			// 1. 검색결과가 있으면,
-			// System.out.println("검색결과 있음. 성공.");
-			// 2. 각 컬럼에서 가져오자
-			String id = rs.getString(1); // id
-			String name = rs.getString(2); // name
-			String content = rs.getString(3); 
-			int price = rs.getInt(4); 
-			String company = rs.getString(5); 
-			String img = rs.getString(6); 
-			// System.out.println(id2 + " " + pw + " " + name + " " + tel);
-			// 검색결과를 검색화면 UI부분에 넣어주어야 함. (여기에jop넣으면 안됨)
-			// 3. 가방을 만들자
-			bag = new ProductVO(); // 가방만들어서
-			bag.setId(id); // 가방에다 쫙 넣자
-			bag.setName(name);
-			bag.setContent(content);
-			bag.setPrice(price);
-			bag.setCompany(company);
-			bag.setImg(img);
 
-			// 4. list에 bag을 추가해주자.
-			list.add(bag);
-			} // while로 바뀌었기 때문에 if-else의 else삭제!
+				// 1) 각 컬럼의 있는 값들을 추출해보자.
+				String id = rs.getString(1); // id
+				String name = rs.getString(2); // name
+				String content = rs.getString(3);
+				int price = rs.getInt(4);
+				String company = rs.getString(5);
+				String img = rs.getString(6);
+
+				// 2) 가방을 만들어서 추출한 값들을 넣자
+				bag = new ProductVO(); // 가방만들어서
+				bag.setId(id); // 가방에다 쫙 넣자
+				bag.setName(name);
+				bag.setContent(content);
+				bag.setPrice(price);
+				bag.setCompany(company);
+				bag.setImg(img);
+
+				// 3) 컨테이너에 가방을 넣자.(row의 갯수)
+				list.add(bag);
+			}
+
 			ps.close();
 			rs.close();
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// return id, pw, name, tel은 XXXX! ==> 파이썬만 가능
-		// return 뒤에는 반드시 여러 데이터를 묶어서 리턴해주어야 함 ==> 자바는 가방을 만들어줘야함
-		// 검색결과가 있을 때는 bag에 데이터가 들어있음.
-		// 검색결과가 없을 때는 bag에 무엇이 들어있나? null
+		// 4) 컨테이너 return 하기
 		return list;
 	}
 
@@ -118,15 +113,18 @@ public class ProductDAO {
 			System.out.println("4. SQL문 mySQL로 보내기 성공.");
 			if (rs.next()) { // 검색결과가 있는지 여부는 rs.next()
 				// true이면 있다라는 의미, false이면 없다라는 의미
+				
+				// 1) 각 컬럼의 있는 값들을 추출해보자.
 				System.out.println("검색결과 있음. 성공.");
 				String id2 = rs.getString(1); // id
 				String name = rs.getString(2); // name
-				String content = rs.getString(3); 
-				int price = rs.getInt(4); 
-				String company = rs.getString(5); 
-				String img = rs.getString(6); 
-				System.out.println(id2 + " " + name + " " + content + " " + price + " " + company + " " + img );
-				// 검색결과를 검색화면 UI부분에 넣어주어야 함. (여기에jop넣으면 안됨)
+				String content = rs.getString(3);
+				int price = rs.getInt(4);
+				String company = rs.getString(5);
+				String img = rs.getString(6);
+				System.out.println(id2 + " " + name + " " + content + " " + price + " " + company + " " + img);
+
+				// 2) 가방을 만들어서 추출한 값들을 넣자
 				bag = new ProductVO();
 				bag.setId(id2);
 				bag.setName(name);
