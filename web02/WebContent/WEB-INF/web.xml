@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>web02</display-name>
+  
+  <!-- 어노테이션을 안쓰는 경우,안되는 경우:  따로 web.xml에 서블릿을 등록해야함. -->
+  <servlet>					<!-- 서블릿 등록해주기 -->
+  	<servlet-name>test</servlet-name>
+  	<servlet-class>multi.Test</servlet-class>
+  	<init-param>
+  		<param-name>no</param-name> 	<!-- no라고 할때 어떻게 해줄까? -->
+  		<param-value>nononono</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>			<!-- 주소 설정해주기 -->
+  	<servlet-name>test</servlet-name>
+  	<url-pattern>/test.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- web.xml확인문제  -->
+  <servlet>
+  <servlet-name>monday</servlet-name>
+  <servlet-class>multi.Monday</servlet-class>
+  <init-param>
+  	<param-name>temp</param-name>
+  	<param-value>good</param-value>
+  </init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>monday</servlet-name>
+  	<url-pattern>/monday2.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!-- 첫페이지 설정(위에서부터 우선순위) -->
+  <welcome-file-list>
+    <welcome-file>main.html</welcome-file>
+    <welcome-file>main.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
