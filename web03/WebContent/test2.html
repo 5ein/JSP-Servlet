@@ -1,0 +1,50 @@
+<!-- 자바스크립트 정리문제2
+다음과 같이 입력받은 후, 출력해보세요. 함수명 bag(), bag2()
+가방안에 들어있는 물건 중 제일 중요한 것 입력: 휴대폰
+가방안에 들어있는 물건 중 두번째 중요한 것 입력: 시계
+=>제일 중요한 것 확인버튼 누르면, "휴대폰”이면 휴대폰 사진,
+"시계"이면 시계 사진, 기타이면 아무거나 사진
+=> 두번째 중요한 것 확인버튼 누르면, “시계”이면
+시계판매사이트로 화면 넘어감, “가방"이면 가방판매사이트로
+화면 넘어감. (Get요청) -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function check() {
+		first = document.getElementById("first").value;
+		
+		Tag = document.getElementById("here");
+		
+		if (first == "휴대폰") {
+			Tag.innerHTML = '<img src=img/phone.jpg width=300 height=200>'
+		} else if (first == "시계") {
+			Tag.innerHTML = '<img src=img/clock.png width=300 height=200>'
+		} else{
+			Tag.innerHTML = '<img src=img/some.png width=300 height=200>'
+		}
+	}
+	function check2() {
+		second = document.getElementById("second").value;
+		if (second == "시계") {
+			location.href = "https://www.coupang.com/vp/products/1946251575?itemId=3304314838&vendorItemId=77291849578&q=%EC%86%90%EB%AA%A9%EC%8B%9C%EA%B3%84&itemsCount=36&searchId=f606ade9b5e8462887aee5a34ce76a47&rank=6&isAddedCart="
+		}else if (second == "가방") {
+			location.href = "https://www.coupang.com/vp/products/7014365085?itemId=17250330655&vendorItemId=84421751774&q=%EA%B0%80%EB%B0%A9&itemsCount=36&searchId=96d7071f744e425d97c6b7cb76b80ec6&rank=7&isAddedCart="
+		}else {
+			location.href = "https://www.coupang.com/"
+		}		
+	}
+</script>
+</head>
+<body>
+	가방안에 있는 것 중 제일 중요한것: <input id="first" value="휴대폰">
+	<button onclick="check()">확인</button><br>
+	<hr color="blue">
+	가방안에 있는 것 중 두번쨰로 중요한것: <input id="second" value="시계">
+	<button onclick="check2()">확인</button><br>
+	<hr color="blue">
+	<div id="here" style="color: blac; width: 600px; height: 50px; font-size: 30px;">결과창</div>
+</body>
+</html>
