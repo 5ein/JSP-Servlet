@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+	//시작하자 마자 통신해보자.!!
+	$(function() {
+		$.ajax({ //url이랑 success는 무조건 넣어주어야함!!
+			url : "index.html",
+			data : {},
+			success : function() {
+				alert("첫번쨰 성공!!")
+			},//--success
+			error : function() {
+				
+			}//-error
+		})//--ajax
+		$.ajax({ //url이랑 success는 무조건 넣어주어야함!!
+			url : "index2.html",
+			data : {},
+			success : function() {
+				alert("두번째 성공!!")
+			}, //--success
+			error : function() {
+				
+			}//--error
+		})//--ajax
+	})//--$
+</script>
+</head>
+<body>
+
+</body>
+</html>

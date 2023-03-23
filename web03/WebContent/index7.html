@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.6.4.js"></script> 
+<!-- 링크는 링크로 끝난거임. 위에 더쓰면 인돼 아래에 새로 해야해  -->
+<script type="text/javascript">
+	$(function() { //jqeury 기본 사용법: $쓰고 소괄호 결고닫고 쓰고 그안에 펑션적어서 어나니머스펑션
+		//alert("body부분을 dom tree로 ram에 읽어들였음.")
+		//document.getElementById("today") ==> $("today")
+		//콜백함수
+		$('#b1').click(function() {
+			alert('b1이 클릭되었음.') //실행할 내용 정의!(함수 정의!)
+		})
+	})
+</script>
+</head>
+<body>
+오늘 요일: <input id="today" value="목">
+<button id="b1">주말인지 확인..</button>
+</body>
+</html>

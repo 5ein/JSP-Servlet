@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+	//시작하자 마자 통신해보자.!!
+	$(function() {
+		$('#b1').click(function() {
+			//b1을 클릭했을 때 처리 내용,
+			//ok.html을 호출해서 결과를 받아오세요
+			$.ajax({
+				url: "ok.html",
+				success:function(x){
+					alert(x)
+					$('#result').append(x + "<br>")
+				}//success
+			})//ajax
+		})//b1
+	})//$
+</script>
+</head>
+<body>
+<button id="b1">ok사이트 연결 요청</button>
+<button id="b2">tour사이트 연결 요청</button>
+<button id="b3">weather사이트 연결 요청</button>
+<hr color="red">
+<div id="result"></div>
+</body>
+</html>
