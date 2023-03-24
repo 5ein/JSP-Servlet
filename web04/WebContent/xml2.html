@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#b1').click(function() {
+			$.ajax({
+				url: "data/MyDataset.xml",
+				success: function(doc) {
+					alert("xml요청 성공>> " + doc)
+					list = $(doc).find('user')
+					alert(list.length)
+					for (i = 0; i < list.length; i++) {
+						id = $(list[i]).find('id').text()
+						pw = $(list[i]).find('pw').text()
+						username = $(list[i]).find('username').text()
+						gender = $(list[i]).find('gender').text()
+						email = $(list[i]).find('email').text()
+						$('#result').append(id + ", " + 
+											pw + ", " + 
+											username + ", " + 
+											gender + ", " + 
+											email + "<br>")
+						$.ajax({
+							url: "mock2.jsp",
+							data: {
+								id: id,
+								pw: pw,
+								username: username,
+								gender: gender,
+								email: email
+							},
+							success: function() {
+								console.log('넣기 성공~!')
+							}//success
+						})//ajax
+					}//for
+				}//success
+				
+			})//ajax
+		})//b1
+	})//$
+</script>
+</head>
+<body>
+<button style='color: black; background: white' id ="b1">XML받아오기</button>
+<hr color="black">
+<div id="result"></div>
+</body>
+</html>
